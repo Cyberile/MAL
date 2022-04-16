@@ -1,0 +1,20 @@
+{
+    "configBasedir": ".",
+    "defaultSeverity": "warning",
+    "extends": [
+        "stylelint-scss"
+    ],
+    "plugins": [
+        "stylelint-media-use-custom-media",
+        "stylelint-high-performance-animation"
+    ],
+    "rules": {
+        "indentation": 4,
+        "string-quotes": "single",
+        "plugin/no-low-performance-animation-properties": null
+    },
+    "ignoreFiles": [
+        "**/*.html",
+        "**/*.ts"
+    ]
+}

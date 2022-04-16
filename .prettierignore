@@ -1,0 +1,14 @@
+.github/
+.vim/
+.vscode/
+.yarn/
+
+.pnp.js
+.yarnrc.yml
+
+*.md
+
+dist/
+data/**/*.json
+
+*.scss
