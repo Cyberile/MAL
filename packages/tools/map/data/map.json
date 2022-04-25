@@ -36827,6 +36827,15 @@
          "tileheight":16,
          "tiles":[
                 {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
                  "id":3,
                  "properties":[
                         {
@@ -36873,6 +36882,15 @@
                 }, 
                 {
                  "id":19,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":53,
                  "properties":[
                         {
                          "name":"c",
