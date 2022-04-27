@@ -10,7 +10,6 @@ import Hit from '../combat/hit';
 import Abilities from './abilities/abilities';
 import Bank from './containers/impl/bank';
 import Inventory from './containers/impl/inventory';
-import Enchant from './enchant';
 import Friends from './friends';
 import Handler from './handler';
 import Mana from '../points/mana';
@@ -47,7 +46,6 @@ import Equipments from './equipments';
 import Quests from './quests';
 import Regions from '../../../map/regions';
 import Entities from '@kaetram/server/src/controllers/entities';
-import GlobalObjects from '@kaetram/server/src/controllers/globalobjects';
 import { EntityData } from '../../entity';
 import { EquipmentData } from '@kaetram/common/types/equipment';
 import Container from './containers/container';
@@ -86,7 +84,6 @@ export default class Player extends Character {
     public map: Map;
     private regions: Regions;
     private entities: Entities;
-    private globalObjects: GlobalObjects;
 
     public incoming: Incoming;
 
@@ -129,7 +126,6 @@ export default class Player extends Character {
 
     public abilities;
     public friends;
-    public enchant;
     public trade;
     public warp;
 
@@ -146,6 +142,8 @@ export default class Player extends Character {
     public lightsLoaded: number[] = [];
 
     public npcTalk = '';
+    // Currently open store of the player.
+    public storeOpen = '';
 
     public movementStart!: number;
     public pingTime!: number;
@@ -166,16 +164,17 @@ export default class Player extends Character {
 
     //--------------------------------------
 
+    public killCallback?: KillCallback;
+    public npcTalkCallback?: NPCTalkCallback;
+    public doorCallback?: DoorCallback;
+    public readyCallback?(): void;
+
     private teleportCallback?: TeleportCallback;
     private cheatScoreCallback?(): void;
     private profileToggleCallback?: InterfaceCallback;
     private inventoryToggleCallback?: InterfaceCallback;
     private warpToggleCallback?: InterfaceCallback;
     private orientationCallback?(): void;
-    private killCallback?: KillCallback;
-    public npcTalkCallback?: NPCTalkCallback;
-    public doorCallback?: DoorCallback;
-    public readyCallback?(): void;
 
     public constructor(world: World, public database: MongoDB, public connection: Connection) {
         super(connection.id, world, '', -1, -1);
@@ -183,19 +182,17 @@ export default class Player extends Character {
         this.map = world.map;
         this.regions = world.map.regions;
         this.entities = world.entities;
-        this.globalObjects = world.globalObjects;
 
         this.incoming = new Incoming(this);
         this.equipment = new Equipments(this);
         this.quests = new Quests(this);
         this.handler = new Handler(this);
+        this.warp = new Warp(this);
 
         // TODO - Refactor
         this.abilities = new Abilities(this);
         this.friends = new Friends(this);
-        this.enchant = new Enchant(this);
         this.trade = new Trade(this);
-        this.warp = new Warp(this);
 
         this.webSocketClient = connection.type === 'WebSocket';
     }
@@ -206,6 +203,7 @@ export default class Player extends Character {
      */
 
     public load(data: PlayerInfo): void {
+        this.name = data.username;
         this.rights = data.rights;
         this.experience = data.experience;
         this.ban = data.ban;
@@ -277,7 +275,8 @@ export default class Player extends Character {
             this.connection.close(`Player: ${this.username} is banned.`);
         }
 
-        if (this.hitPoints.getHitPoints() < 0) this.hitPoints.setHitPoints(this.getMaxHitPoints());
+        if (this.hitPoints.getHitPoints() < 0)
+            this.hitPoints.setHitPoints(this.hitPoints.getMaxHitPoints());
 
         if (this.mana.getMana() < 0) this.mana.setMana(this.mana.getMaxMana());
 
@@ -319,7 +318,6 @@ export default class Player extends Character {
         this.handler = null!;
         this.inventory = null!;
         this.abilities = null!;
-        this.enchant = null!;
         this.bank = null!;
         this.trade = null!;
         this.warp = null!;
@@ -425,14 +423,6 @@ export default class Player extends Character {
         this.regions.sendRegion(this);
     }
 
-    public die(): void {
-        this.dead = true;
-
-        this.deathCallback?.();
-
-        this.send(new Death(this.instance));
-    }
-
     public teleport(x: number, y: number, isDoor = false, withAnimation = false): void {
         this.teleportCallback?.(x, y, isDoor);
 
@@ -462,31 +452,7 @@ export default class Player extends Character {
      * in order to organize data more neatly.
      */
     public handleObject(id: string): void {
-        let info = this.globalObjects.getInfo(id);
-
-        if (!info) return;
-
-        switch (info.type) {
-            case 'sign': {
-                let data = this.globalObjects.getSignData(id);
-
-                if (!data) return;
-
-                let text = this.globalObjects.talk(data.object, this);
-
-                this.send(
-                    new Bubble({
-                        id,
-                        text,
-                        duration: 5000,
-                        isObject: true,
-                        info: data.info
-                    })
-                );
-
-                break;
-            }
-        }
+        //
     }
 
     public handleBankOpen(): void {
@@ -630,14 +596,6 @@ export default class Player extends Character {
         return this.mana.getMaxMana();
     }
 
-    public override getHitPoints(): number {
-        return this.hitPoints.getHitPoints();
-    }
-
-    public override getMaxHitPoints(): number {
-        return this.hitPoints.getMaxHitPoints();
-    }
-
     private getMovementSpeed(): number {
         // let itemMovementSpeed = Items.getMovementSpeed(this.armour.name),
         //     movementSpeed = itemMovementSpeed || this.defaultMovementSpeed;
@@ -664,7 +622,7 @@ export default class Player extends Character {
 
         this.sendToRegions(
             new Movement(Opcodes.Movement.Move, {
-                id: this.instance,
+                instance: this.instance,
                 x,
                 y,
                 forced: false,
@@ -809,19 +767,6 @@ export default class Player extends Character {
         this.world.push(PacketType.Player, {
             packet,
             player: this
-        });
-    }
-
-    /**
-     * Sends a packet to all regions surrounding the player.
-     * @param packet The packet we are sending to the regions.
-     */
-
-    public sendToRegions(packet: Packet, ignore?: boolean): void {
-        this.world.push(PacketType.Regions, {
-            region: this.region,
-            packet,
-            ignore: ignore ? this.instance : ''
         });
     }
 
@@ -1019,10 +964,6 @@ export default class Player extends Character {
         if (withEquipment) data.equipments = this.equipment.serialize().equipments;
 
         return data;
-    }
-
-    public killCharacter(character: Character): void {
-        this.killCallback?.(character);
     }
 
     public onOrientation(callback: () => void): void {

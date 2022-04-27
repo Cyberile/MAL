@@ -120,13 +120,13 @@ export enum Pointer {
     Button // Pointer for a button
 }
 
-export enum Shop {
+export enum Store {
     Open,
+    Close,
     Buy,
     Sell,
-    Refresh,
-    Select,
-    Remove
+    Update,
+    Select
 }
 
 export enum TeamWar {

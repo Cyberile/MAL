@@ -806,23 +806,19 @@ export default class Renderer {
             'white'
         );
 
-        if (this.input.hoveringEntity) {
+        if (this.input.hovering === Modules.Hovering.Mob) {
             let { x, y } = this.input.getCoords()!;
 
+            if (!this.input.entity) return;
+
             this.drawText(
-                `x: ${x} y: ${y} instance: ${this.input.hoveringEntity.id}`,
+                `x: ${x} y: ${y} instance: ${this.input.entity.id}`,
                 10,
                 71,
                 false,
                 'white'
             );
-            this.drawText(
-                `attack range: ${this.input.hoveringEntity.attackRange}`,
-                10,
-                91,
-                false,
-                'white'
-            );
+            this.drawText(`att range: ${this.input.entity!.attackRange}`, 10, 91, false, 'white');
         }
     }
 
@@ -1202,7 +1198,7 @@ export default class Renderer {
     }
 
     public transition(duration: number, forward: boolean, callback: () => void): void {
-        let textCanvas = $('#textCanvas'),
+        let textCanvas = $('#text-canvas'),
             hasThreshold = () => (forward ? this.brightness > 99 : this.brightness < 1);
         this.transitioning = true;
 
@@ -1259,7 +1255,7 @@ export default class Renderer {
     public adjustBrightness(level: number): void {
         if (level < 0 || level > 100) return;
 
-        $('#textCanvas').css('background', `rgba(0, 0, 0, ${0.5 - level / 200})`);
+        $('#text-canvas').css('background', `rgba(0, 0, 0, ${0.5 - level / 200})`);
     }
 
     public loadStaticSprites(): void {
@@ -1333,8 +1329,8 @@ export default class Renderer {
         for (let object of objects)
             parsedObjects.push(
                 new RectangleObject({
-                    topleft: new Vec2(object.x, object.y),
-                    bottomright: new Vec2(object.x + this.tileSize, object.y + this.tileSize)
+                    topLeft: new Vec2(object.x, object.y),
+                    bottomRight: new Vec2(object.x + this.tileSize, object.y + this.tileSize)
                 })
             );
 

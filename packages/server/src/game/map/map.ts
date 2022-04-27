@@ -9,7 +9,12 @@ import AreasIndex from './areas';
 import Grids from './grids';
 import Regions from './regions';
 
-import type { ProcessedArea, ProcessedDoor, ProcessedMap } from '@kaetram/common/types/map';
+import type {
+    ProcessedArea,
+    ProcessedDoor,
+    ProcessedMap,
+    ProcessedTree
+} from '@kaetram/common/types/map';
 import type World from '../world';
 import type Areas from './areas/areas';
 
@@ -35,13 +40,16 @@ export default class Map {
     private collisions: number[] = map.collisions || [];
     private entities: { [tileId: number]: string } = map.entities;
 
-    public high: number[] = map.high || [];
     public lights!: ProcessedArea[];
     public plateau!: { [index: number]: number };
     public objects!: number[];
     public cursors!: { [tileId: number]: string };
     public doors!: { [index: number]: ProcessedDoor };
     public warps: ProcessedArea[] = map.areas.warps || [];
+    public trees: ProcessedTree[] = map.trees || [];
+
+    // Static chest areas, named as singular to prevent confusion with `chests` area.
+    public chest: ProcessedArea[] = map.areas.chest || [];
 
     private areas!: { [name: string]: Areas };
 
@@ -153,7 +161,7 @@ export default class Map {
      */
 
     public isFlipped(tileId: number): boolean {
-        return tileId > Modules.Constants.DIAGONAL_FLAG;
+        return tileId > Modules.MapFlags.DIAGONAL_FLAG;
     }
 
     /**
@@ -320,14 +328,14 @@ export default class Map {
      */
 
     public getFlippedTile(tileId: number): ParsedTile {
-        let h = !!(tileId & Modules.Constants.HORIZONTAL_FLAG),
-            v = !!(tileId & Modules.Constants.VERTICAL_FLAG),
-            d = !!(tileId & Modules.Constants.DIAGONAL_FLAG);
+        let h = !!(tileId & Modules.MapFlags.HORIZONTAL_FLAG),
+            v = !!(tileId & Modules.MapFlags.VERTICAL_FLAG),
+            d = !!(tileId & Modules.MapFlags.DIAGONAL_FLAG);
 
         tileId &= ~(
-            Modules.Constants.DIAGONAL_FLAG |
-            Modules.Constants.VERTICAL_FLAG |
-            Modules.Constants.HORIZONTAL_FLAG
+            Modules.MapFlags.DIAGONAL_FLAG |
+            Modules.MapFlags.VERTICAL_FLAG |
+            Modules.MapFlags.HORIZONTAL_FLAG
         );
 
         return {

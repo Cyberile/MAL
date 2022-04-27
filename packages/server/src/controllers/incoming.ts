@@ -14,8 +14,10 @@ import Commands from './commands';
 import type {
     LoginPacket,
     MovementPacket,
-    ReadyPacket
-} from '@kaetram/common/types/clientmessages';
+    ProjectilePacket,
+    ReadyPacket,
+    StorePacket
+} from '@kaetram/common/types/messages/incoming';
 import type { ProcessedDoor } from '@kaetram/common/types/map';
 import type { SlotType } from '@kaetram/common/types/slot';
 import type Character from '../game/entity/character/character';
@@ -96,8 +98,8 @@ export default class Incoming {
                         return this.handleClick(message);
                     case Packets.Warp:
                         return this.handleWarp(message);
-                    case Packets.Shop:
-                        return this.handleShop(message);
+                    case Packets.Store:
+                        return this.handleStore(message);
                     case Packets.Camera:
                         return this.handleCamera(message);
                 }
@@ -298,14 +300,11 @@ export default class Incoming {
         if (this.player.dead) return;
 
         switch (opcode) {
-            case Opcodes.Movement.Request:
+            case Opcodes.Movement.Started:
                 this.preventNoClip(requestX!, requestY!);
 
                 this.player.movementStart = Date.now();
 
-                break;
-
-            case Opcodes.Movement.Started:
                 if (movementSpeed !== this.player.movementSpeed) this.player.incrementCheatScore(1);
 
                 if (
@@ -365,14 +364,15 @@ export default class Incoming {
 
                 entity.setPosition(requestX!, requestY!);
 
-                if ((entity as Character).hasTarget()) entity.combat.forceAttack();
+                //if ((entity as Character).hasTarget()) entity.combat.forceAttack();
 
                 break;
 
             case Opcodes.Movement.Orientate:
-                this.player.sendToRegions(
-                    new Movement(Opcodes.Movement.Orientate, [this.player.instance, orientation])
-                );
+                log.debug(`Unhandled Movement.Orientate: ${this.player.username}.`);
+                // this.player.sendToRegions(
+                //     new Movement(Opcodes.Movement.Orientate, [this.player.instance, orientation])
+                // );
 
                 break;
 
@@ -396,8 +396,6 @@ export default class Incoming {
 
     private handleTarget(message: [Opcodes.Target, string]): void {
         let [opcode, instance] = message;
-
-        log.debug(`Target [opcode]: ${instance} [${opcode}]`);
 
         switch (opcode) {
             case Opcodes.Target.Talk: {
@@ -427,13 +425,7 @@ export default class Incoming {
 
                 this.player.cheatScore = 0;
 
-                this.world.push(Modules.PacketType.Regions, {
-                    region: target.region,
-                    packet: new Combat(Opcodes.Combat.Initiate, {
-                        attackerId: this.player.instance,
-                        targetId: target.instance
-                    })
-                });
+                this.player.combat.attack(target);
 
                 break;
             }
@@ -455,58 +447,41 @@ export default class Incoming {
     }
 
     private handleCombat(message: [Opcodes.Combat, string, string]): void {
-        let [opcode] = message;
-
-        switch (opcode) {
-            case Opcodes.Combat.Initiate: {
-                let attacker = this.entities.get(message[1]) as Character,
-                    target = this.entities.get(message[2]) as Character;
-
-                if (
-                    !target ||
-                    target.dead ||
-                    !attacker ||
-                    attacker.dead ||
-                    !this.canAttack(attacker, target)
-                )
-                    return;
-
-                attacker.setTarget(target);
-
-                if (!attacker.combat.started) attacker.combat.forceAttack();
-                else {
-                    attacker.combat.start();
-
-                    attacker.combat.attack(target);
-                }
-
-                target.combat?.addAttacker(attacker);
-
-                break;
-            }
-        }
+        // let [opcode] = message;
+        // switch (opcode) {
+        //     case Opcodes.Combat.Initiate: {
+        //         let attacker = this.entities.get(message[1]) as Character,
+        //             target = this.entities.get(message[2]) as Character;
+        //         if (
+        //             !target ||
+        //             target.dead ||
+        //             !attacker ||
+        //             attacker.dead ||
+        //             !this.canAttack(attacker, target)
+        //         )
+        //             return;
+        //         attacker.setTarget(target);
+        //         if (!attacker.combat.started) attacker.combat.forceAttack();
+        //         else {
+        //             attacker.combat.start();
+        //             attacker.combat.attack(target);
+        //         }
+        //         target.combat?.addAttacker(attacker);
+        //         break;
+        //     }
+        // }
     }
 
-    private handleProjectile(message: [Opcodes.Projectile, string, string]): void {
-        let [type] = message;
+    private handleProjectile(message: ProjectilePacket): void {
+        let projectile = this.entities.get(message.instance) as Projectile,
+            target = this.entities.get(message.target) as Character;
 
-        switch (type) {
-            case Opcodes.Projectile.Impact: {
-                let projectile = this.entities.get(message[1]) as Projectile,
-                    target = this.entities.get(message[2]) as Mob;
+        if (!projectile) return log.warning(`[Incoming] Projectile not found: ${message.instance}`);
+        if (!target) return log.warning(`[Incoming] Target not found: ${message.target}`);
 
-                if (!target || target.dead || !projectile) return;
+        target.hit(projectile.hit.getDamage(), projectile.owner);
 
-                this.world.handleDamage(projectile.owner, target, projectile.damage);
-                this.entities.remove(projectile);
-
-                if (target.combat.started || target.dead || target.isMob()) return;
-
-                target.combat.begin(projectile.owner!);
-
-                break;
-            }
-        }
+        this.entities.remove(projectile);
     }
 
     private handleNetwork(message: [Opcodes.Network]): void {
@@ -662,13 +637,13 @@ export default class Incoming {
         //     case Opcodes.Bank.Select: {
         //         let isBank = type === 'bank';
         //         if (isBank) {
-        //             let bankSlot = this.player.bank.getInfo(index);
-        //             if (bankSlot.id < 1) return;
+        //             let bank-slot = this.player.bank.getInfo(index);
+        //             if (bank-slot.id < 1) return;
         //             // Infinite stacks move all at once, otherwise move one by one.
-        //             let moveAmount = Items.maxStackSize(bankSlot.id) === -1 ? bankSlot.count : 1;
-        //             bankSlot.count = moveAmount;
-        //             if (this.player.inventory.add(bankSlot))
-        //                 this.player.bank.remove(bankSlot.id, moveAmount, index);
+        //             let moveAmount = Items.maxStackSize(bank-slot.id) === -1 ? bank-slot.count : 1;
+        //             bank-slot.count = moveAmount;
+        //             if (this.player.inventory.add(bank-slot))
+        //                 this.player.bank.remove(bank-slot.id, moveAmount, index);
         //         } else {
         //             let inventorySlot = this.player.inventory.slots[index];
         //             if (inventorySlot.id < 1) return;
@@ -770,7 +745,37 @@ export default class Incoming {
         this.player.warp?.warp(id);
     }
 
-    private handleShop(message: [Opcodes.Shop, number, ...unknown[]]): void {
+    private handleStore(data: StorePacket): void {
+        log.debug(`Received store packet: ${data.opcode}`);
+
+        switch (data.opcode) {
+            case Opcodes.Store.Buy:
+                return this.world.stores.purchase(
+                    this.player,
+                    data.storeKey,
+                    data.itemKey,
+                    data.count
+                );
+
+            case Opcodes.Store.Select:
+                return this.world.stores.select(
+                    this.player,
+                    data.storeKey,
+                    data.itemKey,
+                    data.count,
+                    data.index!
+                );
+
+            case Opcodes.Store.Sell:
+                return this.world.stores.sell(
+                    this.player,
+                    data.storeKey,
+                    data.itemKey,
+                    data.count,
+                    data.index!
+                );
+        }
+
         // let [opcode, npcId] = message;
         // switch (opcode) {
         //     case Opcodes.Shop.Buy: {
