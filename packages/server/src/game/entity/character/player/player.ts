@@ -167,7 +167,6 @@ export default class Player extends Character {
     public killCallback?: KillCallback;
     public npcTalkCallback?: NPCTalkCallback;
     public doorCallback?: DoorCallback;
-    public readyCallback?(): void;
 
     private teleportCallback?: TeleportCallback;
     private cheatScoreCallback?(): void;
@@ -280,8 +279,6 @@ export default class Player extends Character {
 
         if (this.mana.getMana() < 0) this.mana.setMana(this.mana.getMaxMana());
 
-        this.verifyRights();
-
         let info = {
             instance: this.instance,
             username: Utils.formatName(this.username),
@@ -323,13 +320,6 @@ export default class Player extends Character {
         this.warp = null!;
 
         this.connection = null!;
-    }
-
-    private verifyRights(): void {
-        if (config.moderators.includes(this.username.toLowerCase())) this.rights = 1;
-
-        if (config.administrators.includes(this.username.toLowerCase()) || config.skipDatabase)
-            this.rights = 2;
     }
 
     public addExperience(exp: number): void {
@@ -1000,9 +990,5 @@ export default class Player extends Character {
 
     public onCheatScore(callback: () => void): void {
         this.cheatScoreCallback = callback;
-    }
-
-    public onReady(callback: () => void): void {
-        this.readyCallback = callback;
     }
 }
