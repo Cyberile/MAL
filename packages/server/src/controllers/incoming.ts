@@ -72,8 +72,6 @@ export default class Incoming {
                         return this.handleEquipment(message);
                     case Packets.Movement:
                         return this.handleMovement(message);
-                    case Packets.Request:
-                        return this.handleRequest(message);
                     case Packets.Target:
                         return this.handleTarget(message);
                     case Packets.Combat:
@@ -89,7 +87,7 @@ export default class Incoming {
                     case Packets.Container:
                         return this.handleContainer(message);
                     case Packets.Respawn:
-                        return this.handleRespawn(message);
+                        return this.handleRespawn();
                     case Packets.Trade:
                         return this.handleTrade(message);
                     case Packets.Enchant:
@@ -381,14 +379,6 @@ export default class Incoming {
         }
     }
 
-    private handleRequest(message: [string]): void {
-        let [id] = message;
-
-        if (id !== this.player.instance) return;
-
-        //this.world.region.push(this.player);
-    }
-
     private handleTarget(message: [Opcodes.Target, string]): void {
         let [opcode, instance] = message;
 
@@ -545,7 +535,7 @@ export default class Incoming {
 
         switch (opcode) {
             case Opcodes.Command.CtrlClick: {
-                this.player.teleport(position.x, position.y, false, true);
+                this.player.teleport(position.x, position.y, true);
 
                 break;
             }
@@ -657,10 +647,8 @@ export default class Incoming {
         // }
     }
 
-    private handleRespawn(message: [string]): void {
-        let [instance] = message;
-
-        if (this.player.instance !== instance) return;
+    private handleRespawn(): void {
+        if (!this.player.dead) return log.warning(`Invalid respawn request.`);
 
         let spawn = this.player.getSpawn();
 
@@ -876,6 +864,6 @@ export default class Incoming {
             ({ x, y } = spawn);
         }
 
-        this.player.teleport(x, y, false, true);
+        this.player.teleport(x, y, true);
     }
 }

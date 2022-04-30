@@ -8,7 +8,8 @@ import {
     Quest,
     Equipment as EquipmentPacket,
     NPC as NPCPacket,
-    Death
+    Death,
+    Despawn
 } from '../../../../network/packets';
 import Map from '../../../map/map';
 import World from '../../../world';
@@ -114,6 +115,8 @@ export default class Handler {
         this.player.combat.stop();
 
         this.player.send(new Death(this.player.instance));
+
+        this.player.sendToRegions(new Despawn(this.player.instance), true);
     }
 
     /**
@@ -128,7 +131,7 @@ export default class Handler {
             return quest.doorCallback?.(door, this.player);
         }
 
-        this.player.teleport(door.x, door.y, true);
+        this.player.teleport(door.x, door.y);
 
         log.debug(`[Handler] Going through door: ${door.x} - ${door.y}`);
     }
