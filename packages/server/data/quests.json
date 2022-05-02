@@ -103,43 +103,26 @@
       }
     }
   }
-  "test": {
-    "name": "Test MAL space",
+
+  "tutor": {
+    "name": "MAL space",
     "description": "Teaching you the very basics of MAL.",
     "stages": {
       "0": {
         "task": "talk",
         "npc": "octocat",
         "text": [
-          "Hello there, This is a Test.",
+          "Hello there, I am the programmer of this world.",
           "You'll first need to complete this tutorial",
           "before you can proceed.", "Do not worry, I coded it to be pretty short.",
           "Off you go!"],
         "completedText": ["Why don't you just walk through that door over there eh?"],
         "pointer": {
           "type": 0,
-          "x": 30,
-          "y": 30
-        }
-      },
-
-      "1": {
-        "task": "door",
-        "pointer": {
-          "type": 0,
-          "x": 10,
-          "y": 10
-        }
-      },
-
-      "2": {
-        "task": "door",
-        "pointer": {
-          "type": 0,
-          "x": 20,
-          "y": 20
+          "x": 16,
+          "y": 16
         }
       }
     }
-  }
+    }
 }
