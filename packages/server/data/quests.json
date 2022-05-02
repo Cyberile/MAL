@@ -104,29 +104,3 @@
     }
   }
 }
-
-{
-  "test": {
-    "name": "MAL space",
-    "description": "Basics of MAL.",
-    "stages": {
-      "0": {
-        "task": "door",
-        "pointer": {
-          "type": 0,
-          "x": 406,
-          "y": 19
-        }
-      },
-
-      "1": {
-        "task": "door",
-        "pointer": {
-          "type": 0,
-          "x": 406,
-          "y": 19
-        }
-      }
-    }
-  }
-}
