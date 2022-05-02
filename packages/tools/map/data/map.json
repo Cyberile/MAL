@@ -3099,6 +3099,17 @@
                  "height":16,
                  "id":210,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"object",
+                         "value":49
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"string",
+                         "value":"u"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
