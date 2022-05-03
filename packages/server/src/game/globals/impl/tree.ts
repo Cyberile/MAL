@@ -19,9 +19,12 @@ export default class Tree {
     public data: { [index: number]: Tile } = {};
 
     // Tile data if the tree has been cut.
-    public cutData: { [index: number]: Tile } = {};
+    private cutData: { [index: number]: Tile } = {};
 
-    public cut = false;
+    public state: Modules.TreeState = Modules.TreeState.Default;
+
+    private respawnTimeout?: NodeJS.Timeout | undefined;
+    private stateCallback?: () => void;
 
     public constructor(public type: string) {}
 
@@ -75,10 +78,63 @@ export default class Tree {
         });
     }
 
+    /**
+     * Cuts a tree by updating its state. We create a respawn
+     * timeout that regrows the tree and updates the nearby
+     * region when the timeout expires.
+     */
+
+    public cut(): void {
+        // Cannot cut a tree that's already cut.
+        if (this.respawnTimeout) return;
+
+        this.setState(Modules.TreeState.Cut);
+
+        // Reset the tree once the timeout expires.
+        this.respawnTimeout = setTimeout(() => {
+            this.setState(Modules.TreeState.Default);
+
+            this.respawnTimeout = undefined;
+        }, Modules.Constants.TREE_REGROW);
+    }
+
+    /**
+     * Checks whether the tree is cut or not.
+     * @returns If the current state is that of a cut tree state.
+     */
+
+    private isCut(): boolean {
+        return this.state === Modules.TreeState.Cut;
+    }
+
+    /**
+     * Updates the state of the tree and creates a callback.
+     * @param state The new state of the tree.
+     */
+
+    private setState(state: Modules.TreeState): void {
+        this.state = state;
+
+        this.stateCallback?.();
+    }
+
+    /**
+     * Iterates through each tile in the data (depending on the state of the tree).
+     * @param callback The data tile alongside its parsed number index.
+     */
+
     public forEachTile(callback: (data: Tile, index: number) => void): void {
         // Data depends on the state of the tree.
-        let data = this.cut ? this.cutData : this.data;
+        let data = this.isCut() ? this.cutData : this.data;
 
         _.each(data, (tile: Tile, index: string) => callback(tile, parseInt(index)));
+    }
+
+    /**
+     * Callback for when a tree undergoes a state change.
+     */
+
+    public onStateChange(callback: () => void): void {
+        this.stateCallback = callback;
     }
 }
