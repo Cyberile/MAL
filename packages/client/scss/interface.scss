@@ -498,6 +498,31 @@
     position: absolute;
 }
 
+#ap-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-repeat: no-repeat;
+    pointer-events: auto;
+    display: none;
+    cursor: default;
+    z-index: 100;
+}
+
+.ap-button {
+    position: absolute;
+    background-position-y: 0;
+}
+
+#close-ap-frame {
+    top: 0;
+    left: 95%;
+}
+
+.arp-button {
+    position: absolute;
+}
+
 #shop {
     position: absolute;
     display: none;
