@@ -1,0 +1,16 @@
+{
+"name": "MAL A0",
+"description": "MAL by Hisomu",
+"image": "ifps://QmaWWjsrukY7iE8Kpas14X66t3jicHQ2wMW9HFRXr7dGFj/4.png",
+"edition": 1,
+"attibutes": [ 
+    {
+    "trait_type": "Background",
+    "value": "Blue"
+    };
+    {
+    "trait_type": "Body type",
+    "value": "Ape 1"
+    };
+]
+}
