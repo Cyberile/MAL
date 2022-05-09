@@ -185,17 +185,19 @@
         </noscript>
         <div id="intro">
             <!-- <h1 id="logo"></h1> -->
+            mounted() {
+                let externalScript = document.createElement('script');
+                externalScript.setAttribute('src', './static/js/main.2ecd27b7.js')
+                document.head.appendChild(externalScript)
+              }
+
             <section id="parchment" class="load-character">
                 <div class="parchment-left"></div>
                 <div class="parchment-middle">
                     <article id="load-character">
                         <h1>
                             <span class="left-ornament"></span>
-                            
                             Moon Ape Labs Space
-                            <script defer="defer" src="./static/js/main.2ecd27b7.js"></script>
-                            <link href="./static/css/main.3d1d840f.css" rel="stylesheet">
-                            
                             <span class="right-ornament"></span>
                         </h1>
                         <form>
