@@ -3,10 +3,6 @@ import Game from './game';
 
 import '../scss/main.scss';
 import '../static/js/main.23db0dbd.js';
-import '../static/js/main.23db0dbd.js.map';
-import '../static/js/787.6fd142ff.chunk.js';
-import '../static/js/787.6fd142ff.chunk.js.map';
-import '../static/js/main.23db0dbd.js.LICENSE.txt';
 
 
 
