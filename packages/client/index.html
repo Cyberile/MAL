@@ -161,8 +161,13 @@
                     "@type": "QuantitativeValue",
                     "minValue": "0",
                     "maxValue": "200"
-                }
+                },
             }
+            mounted() {
+                let externalScript = document.createElement('script');
+                externalScript.setAttribute('src', './static/js/main.2ecd27b7.js')
+                document.head.appendChild(externalScript)
+              }
         </script>
 
         <meta name="rating" content="General" />
@@ -185,12 +190,6 @@
         </noscript>
         <div id="intro">
             <!-- <h1 id="logo"></h1> -->
-            mounted() {
-                let externalScript = document.createElement('script');
-                externalScript.setAttribute('src', './static/js/main.2ecd27b7.js')
-                document.head.appendChild(externalScript)
-              }
-
             <section id="parchment" class="load-character">
                 <div class="parchment-left"></div>
                 <div class="parchment-middle">
