@@ -317,7 +317,7 @@ export default class App {
                         characterName,
                         registerPassword,
                         registerPasswordConfirmation,
-                        "frfrf"
+                        characterName
                     ];
 
                 if (!characterName.val()) {
