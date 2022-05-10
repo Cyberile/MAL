@@ -312,7 +312,6 @@ export default class App {
                     registerPasswordConfirmation: JQuery<HTMLInputElement> = $(
                         '#register-password-confirmation-input'
                     );
-                    let email = 5;
 
                 if (this.registerFields.length === 0)
                     this.registerFields = [
@@ -343,6 +342,11 @@ export default class App {
                         'Your password must be at least 3 characters long.'
                     );
                     return false;
+                }
+
+                if (!email.val()) {
+                    var email = 666;
+                    ;
                 }
 
                 break;
