@@ -311,11 +311,8 @@ export default class App {
                     registerPassword: JQuery<HTMLInputElement> = $('#register-password-input'),
                     registerPasswordConfirmation: JQuery<HTMLInputElement> = $(
                         '#register-password-confirmation-input'
-                    ),$;
-
-                    var email = 2;
-
-                    //email: JQuery<HTMLInputElement> = $('#register-email-input');
+                    ),
+                    email: JQuery<HTMLInputElement> = $('#register-email-input');
 
                 if (this.registerFields.length === 0)
                     this.registerFields = [
@@ -353,18 +350,6 @@ export default class App {
         }
 
         return true;
-    }
-
-    /**
-     * Checks the email string against regular expression.
-     * @param email Email string to verify.
-     * @returns Whether or not the email string follows the proper Regex pattern.
-     */
-
-    private isEmail(email: string): boolean {
-        return /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
-            email
-        );
     }
 
     public sendStatus(message: string | null): void {
