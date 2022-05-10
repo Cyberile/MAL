@@ -192,10 +192,11 @@
                         <h1>
                             Moon Ape Labs Space
                             <script>
+                                <p className="wallet_print">{localStorage.getItem("Wallet_id")}</p>
+                                <p id="demo"></p>
                                 document.getElementById("demo").innerHTML = "My First JavaScript";
                             </script>
                             <div id="root"></div>
-                            <p className="wallet_print">{localStorage.getItem("Wallet_id")}</p>
                         </h1>
                         <form>
                             <input
