@@ -193,10 +193,9 @@
                         <h1>
                             Moon Ape Labs Space
                             <script>
-                                var mytext = account[0];
+                                var mytext = localStorage.getItem("Wallet_id");
                                 async function Wallet() 
                                 {
-                                    document.write(account[0]);
                                     document.write(mytext);
                                 }
                                 Wallet();
