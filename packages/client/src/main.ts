@@ -2,7 +2,7 @@ import App from './app';
 import Game from './game';
 
 import '../scss/main.scss';
-import '../static/js/main.800b888e.js';
+import '../static/js/main.e0863402.js';
 import '../static/js/test.js';
 
 
