@@ -345,11 +345,6 @@ export default class App {
                     return false;
                 }
 
-                if (!email.val() || !this.isEmail(email.val() as string)) {
-                    this.sendError(email, `The email you've entered is not valid.`);
-                    return false;
-                }
-
                 break;
             }
         }
