@@ -309,7 +309,9 @@ export default class App {
             case 'create-character': {
                 let characterName: JQuery<HTMLInputElement> = $('#register-name-input'),
                     registerPassword: JQuery<HTMLInputElement> = $('#register-password-input'),
-                    registerPasswordConfirmation: JQuery<HTMLInputElement> = $('#register-password-confirmation-input'),
+                    registerPasswordConfirmation: JQuery<HTMLInputElement> = $(
+                        '#register-password-confirmation-input'
+                    ),
                     email: JQuery<HTMLInputElement> = $('#register-email-input');
 
                 if (this.registerFields.length === 0)
@@ -317,7 +319,7 @@ export default class App {
                         characterName,
                         registerPassword,
                         registerPasswordConfirmation,
-                        characterName
+                        email
                     ];
 
                 if (!characterName.val()) {
