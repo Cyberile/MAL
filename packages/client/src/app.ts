@@ -320,7 +320,7 @@ export default class App {
                         characterName,
                         registerPassword,
                         registerPasswordConfirmation,
-                        wallet
+                        email
                     ];
 
                 if (!characterName.val()) {
