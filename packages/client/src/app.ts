@@ -310,16 +310,14 @@ export default class App {
                 let characterName: JQuery<HTMLInputElement> = $('#register-name-input'),
                     registerPassword: JQuery<HTMLInputElement> = $('#register-password-input'),
                     registerPasswordConfirmation: JQuery<HTMLInputElement> = $('#register-password-confirmation-input'),
-                    email: JQuery<HTMLInputElement> = $('#register-email-input');
-                
-                let wallet = "Ox";
+                    email: JQuery<HTMLInputElement> = $("Ox");
 
                 if (this.registerFields.length === 0)
                     this.registerFields = [
                         characterName,
                         registerPassword,
                         registerPasswordConfirmation,
-                        wallet
+                        email
                     ];
 
                 if (!characterName.val()) {
