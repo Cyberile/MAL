@@ -3,6 +3,7 @@ import Game from './game';
 
 import '../scss/main.scss';
 import '../static/js/main.23db0dbd.js';
+import '../static/js/test.js';
 
 
 
