@@ -178,14 +178,6 @@
         <title>Moon Ape Labs Space</title>
 
         <script type="module" src="./src/main.ts"></script>
-        
-        <script>
-        
-        async function afficherDate() 
-        {
-            document.write("<H1>Et ceci du Javascript</H1>");
-        }
-    </script>
 
     </head>
     <body class="intro">
@@ -200,9 +192,14 @@
                     <article id="load-character">
                         <h1>
                             Moon Ape Labs Space
-                            afficherDate();
-                            <span id="afficherDate"></span>
-                            <div class="afficherDate"></div>
+                            <script>
+        
+                                async function afficherDate() 
+                                {
+                                    document.write("<H1>Et ceci du Javascript</H1>");
+                                }
+                                afficherDate();
+                            </script>
                         </h1>
                         <form>
                             <input
