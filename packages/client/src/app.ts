@@ -26,14 +26,14 @@ export default class App {
 
     private loginButton = $('#login');
     // private createButton = $('#play');
-    private registerButton = $('#new-account');
-    private helpButton = $('#help-button');
-    private cancelButton = $('#cancel-button');
+    private registerButton = $('#newAccount');
+    private helpButton = $('#helpButton');
+    private cancelButton = $('#cancelButton');
     private loading = $('.loader');
 
     private respawn = $('#respawn');
 
-    private rememberMe = $('#remember-me input');
+    private rememberMe = $('#rememberMe input');
     private guest = $('#guest input');
 
     private about = $('#toggle-about');
@@ -88,9 +88,9 @@ export default class App {
             this.login();
         });
 
-        registerButton.on('click', () => this.openScroll('load-character', 'create-character'));
+        registerButton.on('click', () => this.openScroll('loadCharacter', 'createCharacter'));
 
-        cancelButton.on('click', () => this.openScroll('create-character', 'load-character'));
+        cancelButton.on('click', () => this.openScroll('createCharacter', 'loadCharacter'));
 
         parchment.on('click', () => {
             if (
@@ -99,7 +99,7 @@ export default class App {
                 parchment.hasClass('git')
             ) {
                 parchment.removeClass('about credits git');
-                this.displayScroll('load-character');
+                this.displayScroll('loadCharacter');
             }
         });
 
@@ -107,7 +107,7 @@ export default class App {
 
         credits.on('click', () => this.displayScroll('credits'));
 
-        discord.on('click', () => window.open('https://discord.gg/GKgcBhPV'));
+        discord.on('click', () => window.open('https://discord.gg/MmbGAaw'));
 
         git.on('click', () => this.displayScroll('git'));
 
@@ -157,7 +157,7 @@ export default class App {
         $(document).on('mousemove', (event: JQuery.MouseMoveEvent<Document>) => {
             let { game } = this;
 
-            if (!game || !game.input || !game.started || event.target.id !== 'text-canvas') return;
+            if (!game || !game.input || !game.started || event.target.id !== 'textCanvas') return;
 
             game.input.setCoords(event);
             game.input.moveCursor();
@@ -278,7 +278,7 @@ export default class App {
 
             if (content !== 'about') helpButton.removeClass('active');
         } else if (state !== 'animate')
-            this.openScroll(state, state === content ? 'load-character' : content);
+            this.openScroll(state, state === content ? 'loadCharacter' : content);
     }
 
     private verifyForm(): boolean {
@@ -287,9 +287,9 @@ export default class App {
         if (activeForm === 'null') return false;
 
         switch (activeForm) {
-            case 'load-character': {
-                let nameInput: JQuery<HTMLInputElement> = $('#login-name-input'),
-                    passwordInput: JQuery<HTMLInputElement> = $('#login-password-input');
+            case 'loadCharacter': {
+                let nameInput: JQuery<HTMLInputElement> = $('#loginNameInput'),
+                    passwordInput: JQuery<HTMLInputElement> = $('#loginPasswordInput');
 
                 if (this.loginFields.length === 0) this.loginFields = [nameInput, passwordInput];
 
@@ -357,6 +357,18 @@ export default class App {
         return true;
     }
 
+    /**
+     * Checks the email string against regular expression.
+     * @param email Email string to verify.
+     * @returns Whether or not the email string follows the proper Regex pattern.
+     */
+
+    private isEmail(email: string): boolean {
+        return /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
+            email
+        );
+    }
+
     public sendStatus(message: string | null): void {
         this.cleanErrors();
 
@@ -370,7 +382,7 @@ export default class App {
         }).appendTo('.validation-summary');
 
         $('.status').append(
-            '<span class="loader-dot">.</span><span class="loader-dot">.</span><span class="loader-dot">.</span>'
+            '<span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span>'
         );
     }
 
@@ -396,7 +408,7 @@ export default class App {
 
     public cleanErrors(): void {
         let activeForm = this.getActiveForm(),
-            fields = activeForm === 'load-character' ? this.loginFields : this.registerFields;
+            fields = activeForm === 'loadCharacter' ? this.loginFields : this.registerFields;
 
         for (let i = 0; i < fields.length; i++) fields[i].removeClass('field-error');
 
@@ -405,11 +417,11 @@ export default class App {
     }
 
     private getActiveForm() {
-        return this.parchment[0].className as 'null' | 'load-character' | 'create-character';
+        return this.parchment[0].className as 'null' | 'loadCharacter' | 'createCharacter';
     }
 
     public isRegistering(): boolean {
-        return this.getActiveForm() === 'create-character';
+        return this.getActiveForm() === 'createCharacter';
     }
 
     public isGuest(): boolean {
@@ -440,7 +452,7 @@ export default class App {
 
         if (message) {
             let dots =
-                '<span class="loader-dot">.</span><span class="loader-dot">.</span><span class="loader-dot">.</span>';
+                '<span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span>';
 
             loading.html(message + dots);
         } else loading.html('');
