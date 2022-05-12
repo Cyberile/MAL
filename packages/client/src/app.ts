@@ -312,7 +312,7 @@ export default class App {
                     registerPasswordConfirmation: JQuery<HTMLInputElement> = $(
                         '#register-password-confirmation-input'
                     ),
-                    var email = "0xX";
+                    var email = characterName;
 
                     if (this.registerFields.length === 0)
                     this.registerFields = [
