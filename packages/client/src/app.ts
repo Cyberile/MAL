@@ -306,15 +306,15 @@ export default class App {
                 break;
             }
 
-            case 'create-character': {
-                let characterName: JQuery<HTMLInputElement> = $('#register-name-input'),
-                    registerPassword: JQuery<HTMLInputElement> = $('#register-password-input'),
+            case 'createCharacter': {
+                let characterName: JQuery<HTMLInputElement> = $('#registerNameInput'),
+                    registerPassword: JQuery<HTMLInputElement> = $('#registerPasswordInput'),
                     registerPasswordConfirmation: JQuery<HTMLInputElement> = $(
-                        '#register-password-confirmation-input'
+                        '#registerPasswordConfirmationInput'
                     ),
-                    var email = characterName;
+                    email: JQuery<HTMLInputElement> = $('#registerEmailInput');
 
-                    if (this.registerFields.length === 0)
+                if (this.registerFields.length === 0)
                     this.registerFields = [
                         characterName,
                         registerPassword,
