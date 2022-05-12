@@ -323,7 +323,7 @@ export default class App {
                     ];
 
                 if (!characterName.val()) {
-                    this.sendError(characterName, 'A username is necessary you silly.');
+                    this.sendError(characterName, 'A username is necessary.');
                     return false;
                 }
 
