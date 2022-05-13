@@ -707,6 +707,13 @@
     "name": "Black Fur"
   },
 
+  "moonpipe": {
+    "type": "weapon",
+    "attack": 1,
+    "name": "Moon Pipe",
+    "requirement": 1
+  },
+
   "mailarmor": {
     "defense": 3,
     "type": "armour",
