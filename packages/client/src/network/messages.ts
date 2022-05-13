@@ -256,7 +256,7 @@ export default class Messages {
                 break;
 
             case 'maintenance':
-                this.app.sendError(null, 'Kaetram is currently under maintenance.');
+                this.app.sendError(null, 'MAL Space is currently under maintenance.');
                 break;
 
             case 'userexists':
@@ -264,7 +264,7 @@ export default class Messages {
                 break;
 
             case 'emailexists':
-                this.app.sendError(null, 'The email you have chosen is not available.');
+                this.app.sendError(null, 'The wallet you have chosen is not available.');
                 break;
 
             case 'invalidinput':
