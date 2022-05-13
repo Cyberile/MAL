@@ -1654,12 +1654,6 @@
     "stackable": true,
     "maxStackSize": 1,
     "price": 50
-  },
-
-  "blackfur": {
-    "defense": 1,
-    "type": "armour",
-    "name": "Black Fur"
   }
 
 }
