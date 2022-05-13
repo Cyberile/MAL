@@ -9196,6 +9196,20 @@
     "offsetY": 0
   },
   {
+    "id": "item-blackfur",
+    "width": 16,
+    "height": 16,
+    "animations": {
+      "idle": {
+        "length": 6,
+        "row": 0
+      }
+    },
+    "offsetX": 0,
+    "offsetY": 0
+  },
+
+  {
     "id": "item-legolasarmor",
     "width": 16,
     "height": 16,
