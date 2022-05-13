@@ -701,6 +701,12 @@
     "name": "Leather Armour"
   },
 
+  "blackfur": {
+    "defense": 2,
+    "type": "armour",
+    "name": "Black Fur"
+  },
+
   "mailarmor": {
     "defense": 3,
     "type": "armour",
