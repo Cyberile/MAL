@@ -1656,4 +1656,10 @@
     "price": 50
   }
 
+  "blackfur": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Black Fur"
+  },
+
 }
