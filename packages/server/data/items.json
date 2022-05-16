@@ -714,6 +714,13 @@
     "requirement": 1
   },
 
+  "tastybrainredhat": {
+    "type": "weapon",
+    "attack": 1,
+    "name": "Tasty Brain Red",
+    "requirement": 1
+  },
+
   "mailarmor": {
     "defense": 3,
     "type": "armour",
