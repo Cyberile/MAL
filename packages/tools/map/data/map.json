@@ -1052,72 +1052,6 @@
                 }, 
                 {
                  "height":16,
-                 "id":14,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"destination",
-                         "type":"object",
-                         "value":15
-                        }, 
-                        {
-                         "name":"orientation",
-                         "type":"string",
-                         "value":"u"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":8032.00159269324,
-                 "y":400.002178030303
-                }, 
-                {
-                 "height":16,
-                 "id":15,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"destination",
-                         "type":"object",
-                         "value":14
-                        }, 
-                        {
-                         "name":"orientation",
-                         "type":"string",
-                         "value":"u"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":5296,
-                 "y":1552
-                }, 
-                {
-                 "height":16,
-                 "id":213,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"destination",
-                         "type":"object",
-                         "value":14
-                        }, 
-                        {
-                         "name":"orientation",
-                         "type":"string",
-                         "value":"u"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":5296,
-                 "y":1552
-                }, 
-                {
-                 "height":16,
                  "id":18,
                  "name":"",
                  "properties":[
@@ -3026,8 +2960,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":5216,
-                 "y":1472
+                 "x":10192,
+                 "y":304
                 }, 
                 {
                  "height":16,
