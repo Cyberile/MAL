@@ -842,10 +842,100 @@
                  "width":0,
                  "x":1296,
                  "y":1520
+                }, 
+                {
+                 "height":0,
+                 "id":343,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":176,
+                         "y":706
+                        }, 
+                        {
+                         "x":-328,
+                         "y":-46
+                        }, 
+                        {
+                         "x":-439,
+                         "y":-44
+                        }, 
+                        {
+                         "x":-562,
+                         "y":-40
+                        }, 
+                        {
+                         "x":-673,
+                         "y":68
+                        }, 
+                        {
+                         "x":-819,
+                         "y":218
+                        }, 
+                        {
+                         "x":-933,
+                         "y":216
+                        }, 
+                        {
+                         "x":-932,
+                         "y":378
+                        }, 
+                        {
+                         "x":-1065,
+                         "y":498
+                        }, 
+                        {
+                         "x":-702,
+                         "y":502
+                        }, 
+                        {
+                         "x":-703,
+                         "y":550.5
+                        }, 
+                        {
+                         "x":-572,
+                         "y":552
+                        }, 
+                        {
+                         "x":-570,
+                         "y":694
+                        }, 
+                        {
+                         "x":-352,
+                         "y":688
+                        }, 
+                        {
+                         "x":-322,
+                         "y":690
+                        }, 
+                        {
+                         "x":-321,
+                         "y":553
+                        }, 
+                        {
+                         "x":-186,
+                         "y":553
+                        }, 
+                        {
+                         "x":-182,
+                         "y":694
+                        }],
+                 "properties":[
+                        {
+                         "name":"songName",
+                         "type":"string",
+                         "value":"village"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":10644,
+                 "y":236
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -5217,7 +5307,7 @@
          "y":0
         }],
  "nextlayerid":55,
- "nextobjectid":343,
+ "nextobjectid":344,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
