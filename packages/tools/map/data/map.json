@@ -4389,6 +4389,50 @@
                  "width":16,
                  "x":10528,
                  "y":1680
+                }, 
+                {
+                 "height":16,
+                 "id":344,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"object",
+                         "value":345
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"string",
+                         "value":"u"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":10176,
+                 "y":320
+                }, 
+                {
+                 "height":16,
+                 "id":345,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"object",
+                         "value":344
+                        }, 
+                        {
+                         "name":"orientation",
+                         "type":"string",
+                         "value":"d"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":10208,
+                 "y":320
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5217,7 +5261,7 @@
          "y":0
         }],
  "nextlayerid":55,
- "nextobjectid":344,
+ "nextobjectid":346,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
@@ -43352,6 +43396,69 @@
                  "id":2576
                 }, 
                 {
+                 "id":2608,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2609,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2610,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2611,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2612,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2613,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2614,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
                  "animation":[
                         {
                          "duration":100,
@@ -43493,6 +43600,69 @@
                          "tileid":2648
                         }],
                  "id":2640
+                }, 
+                {
+                 "id":2672,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2673,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2674,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2675,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2676,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2677,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2678,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
                 }, 
                 {
                  "animation":[
@@ -43721,6 +43891,69 @@
                  "properties":[
                         {
                          "name":"v",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2736,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2737,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2738,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2739,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2740,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2741,
+                 "properties":[
+                        {
+                         "name":"c",
+                         "type":"string",
+                         "value":""
+                        }]
+                }, 
+                {
+                 "id":2742,
+                 "properties":[
+                        {
+                         "name":"c",
                          "type":"string",
                          "value":""
                         }]
