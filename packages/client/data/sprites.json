@@ -5753,8 +5753,8 @@
   },
   {
     "id": "goblin",
-    "width": 32,
-    "height": 32,
+    "width": 42,
+    "height": 42,
     "animations": {
       "atk_right": {
         "length": 5,
@@ -5793,8 +5793,8 @@
         "row": 8
       }
     },
-    "offsetX": -8,
-    "offsetY": -12
+    "offsetX": -13,
+    "offsetY": -17
   },
  {
     "id": "goldenarcherarmor",
