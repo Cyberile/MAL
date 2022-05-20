@@ -1473,6 +1473,33 @@
                 }, 
                 {
                  "height":16,
+                 "id":349,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"object",
+                         "value":227
+                        }, 
+                        {
+                         "name":"quest",
+                         "type":"string",
+                         "value":"tutorial"
+                        }, 
+                        {
+                         "name":"stage",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":10496,
+                 "y":432
+                }, 
+                {
+                 "height":16,
                  "id":54,
                  "name":"",
                  "properties":[
@@ -3207,7 +3234,7 @@
                         {
                          "name":"destination",
                          "type":"object",
-                         "value":230
+                         "value":349
                         }],
                  "rotation":0,
                  "type":"",
@@ -3225,7 +3252,7 @@
                  "visible":true,
                  "width":16,
                  "x":10480,
-                 "y":416
+                 "y":432
                 }, 
                 {
                  "height":16,
@@ -3248,28 +3275,6 @@
                  "width":16,
                  "x":10480,
                  "y":480
-                }, 
-                {
-                 "height":16,
-                 "id":230,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"destination",
-                         "type":"object",
-                         "value":227
-                        }, 
-                        {
-                         "name":"orientation",
-                         "type":"string",
-                         "value":"u"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":10496,
-                 "y":416
                 }, 
                 {
                  "height":16,
@@ -5304,7 +5309,7 @@
          "y":0
         }],
  "nextlayerid":55,
- "nextobjectid":349,
+ "nextobjectid":350,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
