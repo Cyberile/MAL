@@ -5753,8 +5753,8 @@
   },
   {
     "id": "goblin",
-    "width": 42,
-    "height": 42,
+    "width": 32,
+    "height": 32,
     "animations": {
       "atk_right": {
         "length": 5,
