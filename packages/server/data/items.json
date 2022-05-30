@@ -721,6 +721,120 @@
     "requirement": 1
   },
 
+  "fur_green": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Green"
+  },
+
+  "fur_teal": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Teal"
+  },
+
+  "fur_darkgreen": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Dark Green"
+  },
+
+  "fur_maroon": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Maroon"
+  },
+
+  "fur_white": {
+    "defense": 1,
+    "type": "armour",
+    "name": "White"
+  },
+
+  "fur_bluejelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Blue Jelly"
+  },
+
+  "fur_brown": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Brown"
+  },
+
+  "fur_purplejelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Purple Jelly"
+  },
+
+  "fur_greenjelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Green Jelly"
+  },
+
+  "fur_redjelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Red Jelly"
+  },
+
+  "fur_black": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Black"
+  },
+
+  "fur_blackjelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Black Jelly"
+  },
+
+  "fur_neonjelly": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Neon Jelly"
+  },
+
+  "fur_tattooed": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Tattooed"
+  },
+
+  "fur_terminator": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Terminator"
+  },
+
+  "fur_whitetattooed": {
+    "defense": 1,
+    "type": "armour",
+    "name": "White tattooed"
+  },
+
+  "fur_blackhole": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Blackhole"
+  },
+
+  "fur_skeletonblack": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Skeleton Black"
+  },
+
+  "fur_matrix": {
+    "defense": 1,
+    "type": "armour",
+    "name": "Matrix"
+  },
+
   "eyes_eyes": {
     "type": "weapon",
     "attack": 1,
