@@ -25,7 +25,7 @@
          "name":"ground 2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":704,
          "x":0,
          "y":0
@@ -13944,8 +13944,8 @@
                  "type":"",
                  "visible":true,
                  "width":544,
-                 "x":9824,
-                 "y":3392
+                 "x":8608,
+                 "y":3344
                 }, 
                 {
                  "height":272,
