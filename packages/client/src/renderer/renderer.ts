@@ -218,8 +218,8 @@ export default class Renderer {
         this.screenWidth = this.camera.gridWidth * this.tileSize;
         this.screenHeight = this.camera.gridHeight * this.tileSize;
 
-        this.canvasWidth = this.screenWidth * this.superScaling;
-        this.canvasHeight = this.screenHeight * this.superScaling;
+        this.canvasWidth = this.screenWidth * 1.5;
+        this.canvasHeight = this.screenHeight * 1.5;
 
         this.forEachCanvas((canvas) => {
             canvas.width = this.canvasWidth;
@@ -464,10 +464,10 @@ export default class Renderer {
         if (!sprite || !animation || !entity.isVisible()) return;
 
         let frame = animation.currentFrame,
-            x = frame.x / 2,
-            y = frame.y / 2,
-            dx = entity.x / 2,
-            dy = entity.y / 2,
+            x = frame.x * this.superScaling,
+            y = frame.y * this.superScaling,
+            dx = entity.x * this.superScaling,
+            dy = entity.y * this.superScaling,
             flipX = dx + this.tileSize * this.superScaling,
             flipY = dy + data.height;
 
