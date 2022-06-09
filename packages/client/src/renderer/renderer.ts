@@ -464,10 +464,10 @@ export default class Renderer {
         if (!sprite || !animation || !entity.isVisible()) return;
 
         let frame = animation.currentFrame,
-            x = frame.x * 4,
-            y = frame.y * 4,
-            dx = entity.x * 4,
-            dy = entity.y * 4,
+            x = frame.x / 2,
+            y = frame.y / 2,
+            dx = entity.x / 2,
+            dy = entity.y / 2,
             flipX = dx + this.tileSize * this.superScaling,
             flipY = dy + data.height;
 
