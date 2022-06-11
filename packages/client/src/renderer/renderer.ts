@@ -218,8 +218,8 @@ export default class Renderer {
         this.screenWidth = this.camera.gridWidth * this.tileSize;
         this.screenHeight = this.camera.gridHeight * this.tileSize;
 
-        this.canvasWidth = this.screenWidth * 1.5;
-        this.canvasHeight = this.screenHeight * 1.5;
+        this.canvasWidth = this.screenWidth * this.superScaling;
+        this.canvasHeight = this.screenHeight * this.superScaling;
 
         this.forEachCanvas((canvas) => {
             canvas.width = this.canvasWidth;
@@ -806,19 +806,23 @@ export default class Renderer {
             'white'
         );
 
-        if (this.input.hovering === Modules.Hovering.Mob) {
+        if (this.input.hoveringEntity) {
             let { x, y } = this.input.getCoords()!;
 
-            if (!this.input.entity) return;
-
             this.drawText(
-                `x: ${x} y: ${y} instance: ${this.input.entity.id}`,
+                `x: ${x} y: ${y} instance: ${this.input.hoveringEntity.id}`,
                 10,
                 71,
                 false,
                 'white'
             );
-            this.drawText(`att range: ${this.input.entity!.attackRange}`, 10, 91, false, 'white');
+            this.drawText(
+                `attack range: ${this.input.hoveringEntity.attackRange}`,
+                10,
+                91,
+                false,
+                'white'
+            );
         }
     }
 
@@ -1032,6 +1036,8 @@ export default class Renderer {
              * it every time the tile moves slightly.
              */
 
+            id -= 1;
+
             if (!this.map.isAnimatedTile(id)) return;
 
             /**
@@ -1039,7 +1045,7 @@ export default class Renderer {
              */
 
             if (!(index in this.animatedTiles)) {
-                let tile = new Tile(id, index, this.map.getTileAnimation(id)),
+                let tile = new Tile(id, index, this.map),
                     position = this.map.indexToCoord(tile.index);
 
                 tile.setPosition(position);
@@ -1196,7 +1202,7 @@ export default class Renderer {
     }
 
     public transition(duration: number, forward: boolean, callback: () => void): void {
-        let textCanvas = $('#text-canvas'),
+        let textCanvas = $('#textCanvas'),
             hasThreshold = () => (forward ? this.brightness > 99 : this.brightness < 1);
         this.transitioning = true;
 
@@ -1253,7 +1259,7 @@ export default class Renderer {
     public adjustBrightness(level: number): void {
         if (level < 0 || level > 100) return;
 
-        $('#text-canvas').css('background', `rgba(0, 0, 0, ${0.5 - level / 200})`);
+        $('#textCanvas').css('background', `rgba(0, 0, 0, ${0.5 - level / 200})`);
     }
 
     public loadStaticSprites(): void {
@@ -1327,8 +1333,8 @@ export default class Renderer {
         for (let object of objects)
             parsedObjects.push(
                 new RectangleObject({
-                    topLeft: new Vec2(object.x, object.y),
-                    bottomRight: new Vec2(object.x + this.tileSize, object.y + this.tileSize)
+                    topleft: new Vec2(object.x, object.y),
+                    bottomright: new Vec2(object.x + this.tileSize, object.y + this.tileSize)
                 })
             );
 
